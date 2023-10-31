@@ -1,0 +1,26 @@
+C:\Users\user-pc\source\repos\PROGPOEP2_ST10083450\PROGPOEP2_ST10083450\bin\Debug\net7.0-windows\PROGPOEP2_ST10083450.exe
+C:\Users\user-pc\source\repos\PROGPOEP2_ST10083450\PROGPOEP2_ST10083450\bin\Debug\net7.0-windows\PROGPOEP2_ST10083450.deps.json
+C:\Users\user-pc\source\repos\PROGPOEP2_ST10083450\PROGPOEP2_ST10083450\bin\Debug\net7.0-windows\PROGPOEP2_ST10083450.runtimeconfig.json
+C:\Users\user-pc\source\repos\PROGPOEP2_ST10083450\PROGPOEP2_ST10083450\bin\Debug\net7.0-windows\PROGPOEP2_ST10083450.dll
+C:\Users\user-pc\source\repos\PROGPOEP2_ST10083450\PROGPOEP2_ST10083450\bin\Debug\net7.0-windows\PROGPOEP2_ST10083450.pdb
+C:\Users\user-pc\source\repos\PROGPOEP2_ST10083450\PROGPOEP2_ST10083450\bin\Debug\net7.0-windows\PROG6212_POE_P1_Library_ST10083450_Christopher Teague.dll
+C:\Users\user-pc\source\repos\PROGPOEP2_ST10083450\PROGPOEP2_ST10083450\bin\Debug\net7.0-windows\PROG6212_POE_P1_Library_ST10083450_Christopher Teague.pdb
+C:\Users\user-pc\source\repos\PROGPOEP2_ST10083450\PROGPOEP2_ST10083450\obj\Debug\net7.0-windows\PROGPOEP2_ST10083450.csproj.AssemblyReference.cache
+C:\Users\user-pc\source\repos\PROGPOEP2_ST10083450\PROGPOEP2_ST10083450\obj\Debug\net7.0-windows\MainWindow.g.cs
+C:\Users\user-pc\source\repos\PROGPOEP2_ST10083450\PROGPOEP2_ST10083450\obj\Debug\net7.0-windows\App.g.cs
+C:\Users\user-pc\source\repos\PROGPOEP2_ST10083450\PROGPOEP2_ST10083450\obj\Debug\net7.0-windows\PROGPOEP2_ST10083450_MarkupCompile.cache
+C:\Users\user-pc\source\repos\PROGPOEP2_ST10083450\PROGPOEP2_ST10083450\obj\Debug\net7.0-windows\PROGPOEP2_ST10083450_MarkupCompile.lref
+C:\Users\user-pc\source\repos\PROGPOEP2_ST10083450\PROGPOEP2_ST10083450\obj\Debug\net7.0-windows\MainWindow.baml
+C:\Users\user-pc\source\repos\PROGPOEP2_ST10083450\PROGPOEP2_ST10083450\obj\Debug\net7.0-windows\PROGPOEP2_ST10083450.g.resources
+C:\Users\user-pc\source\repos\PROGPOEP2_ST10083450\PROGPOEP2_ST10083450\obj\Debug\net7.0-windows\PROGPOEP2_ST10083450.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user-pc\source\repos\PROGPOEP2_ST10083450\PROGPOEP2_ST10083450\obj\Debug\net7.0-windows\PROGPOEP2_ST10083450.AssemblyInfoInputs.cache
+C:\Users\user-pc\source\repos\PROGPOEP2_ST10083450\PROGPOEP2_ST10083450\obj\Debug\net7.0-windows\PROGPOEP2_ST10083450.AssemblyInfo.cs
+C:\Users\user-pc\source\repos\PROGPOEP2_ST10083450\PROGPOEP2_ST10083450\obj\Debug\net7.0-windows\PROGPOEP2_ST10083450.csproj.CoreCompileInputs.cache
+C:\Users\user-pc\source\repos\PROGPOEP2_ST10083450\PROGPOEP2_ST10083450\obj\Debug\net7.0-windows\PROGPOEP2_ST10083450.csproj.CopyComplete
+C:\Users\user-pc\source\repos\PROGPOEP2_ST10083450\PROGPOEP2_ST10083450\obj\Debug\net7.0-windows\PROGPOEP2_ST10083450.dll
+C:\Users\user-pc\source\repos\PROGPOEP2_ST10083450\PROGPOEP2_ST10083450\obj\Debug\net7.0-windows\refint\PROGPOEP2_ST10083450.dll
+C:\Users\user-pc\source\repos\PROGPOEP2_ST10083450\PROGPOEP2_ST10083450\obj\Debug\net7.0-windows\PROGPOEP2_ST10083450.pdb
+C:\Users\user-pc\source\repos\PROGPOEP2_ST10083450\PROGPOEP2_ST10083450\obj\Debug\net7.0-windows\PROGPOEP2_ST10083450.genruntimeconfig.cache
+C:\Users\user-pc\source\repos\PROGPOEP2_ST10083450\PROGPOEP2_ST10083450\obj\Debug\net7.0-windows\ref\PROGPOEP2_ST10083450.dll
+C:\Users\user-pc\source\repos\PROGPOEP2_ST10083450\PROGPOEP2_ST10083450\obj\Debug\net7.0-windows\Registration and Login.g.cs
+C:\Users\user-pc\source\repos\PROGPOEP2_ST10083450\PROGPOEP2_ST10083450\obj\Debug\net7.0-windows\Registration and Login.baml
