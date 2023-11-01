@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Data.SqlClient;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.AccessControl;
@@ -26,7 +27,7 @@ namespace PROGPOEP2_ST10083450
             InitializeComponent();
             Closing += RegAndLogClosing;
         }
-
+        public SqlConnection sqlConnection;
         private void btnLoginPage_Click(object sender, RoutedEventArgs e)
         {
             gridRegisterOrLogin.Visibility = Visibility.Hidden;
@@ -36,8 +37,34 @@ namespace PROGPOEP2_ST10083450
 
         private void btnRegisterUser_Click(object sender, RoutedEventArgs e)
         {
+           
+            try
+            {
+                string regUsername = tbxRegUsername.Text;
+                string regPassword = pbRegPassword.Password.ToString();
+                string regPasswordHash = BCrypt.Net.BCrypt.EnhancedHashPassword(regPassword, 10);
+
+                using (SqlConnection connection = new SqlConnection(ConnectionString.connStr))
+                {
+                    connection.Open();
+                    using (SqlCommand command = connection.CreateCommand())
+                    {
+                        command.CommandText = "INSERT INTO Users (userName, passwordHash) VALUES (@UserName ,@PasswordHash)";
+                        command.Parameters.AddWithValue("@UserName", regUsername);
+                        command.Parameters.AddWithValue("@PasswordHash", regPasswordHash);
+                        command.ExecuteNonQuery();
+                    }
+                  
+                }
             gridRegisterPage.Visibility = Visibility.Hidden;
             gridLoginPage.Visibility = Visibility.Visible;
+
+
+            }
+            catch (Exception ex)
+            {
+               MessageBox.Show("Errrrrrrrrror");
+            }
         }
 
         private void btnLoginAccount_Click(object sender, RoutedEventArgs e)
@@ -54,6 +81,13 @@ namespace PROGPOEP2_ST10083450
         {
          
             Application.Current.Shutdown();
+        }
+
+        private void btnRegisterPage_Click(object sender, RoutedEventArgs e)
+        {
+            gridRegisterOrLogin.Visibility = Visibility.Hidden;
+            gridRegisterPage.Visibility= Visibility.Visible;
+            
         }
     }
 }

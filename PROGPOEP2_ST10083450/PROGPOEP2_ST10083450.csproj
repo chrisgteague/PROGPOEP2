@@ -8,6 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.2" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="PROG6212_POE_P1_Library_ST10083450_Christopher Teague">
       <HintPath>..\..\PROG6212_POE_P1_Library_ST10083450_Christopher Teague\PROG6212_POE_P1_Library_ST10083450_Christopher Teague\bin\Debug\net7.0\PROG6212_POE_P1_Library_ST10083450_Christopher Teague.dll</HintPath>
     </Reference>

@@ -1,4 +1,5 @@
-﻿using PROG6212_POE_P1_Library_ST10083450_Christopher_Teague;
+﻿using Microsoft.Data.SqlClient;
+using PROG6212_POE_P1_Library_ST10083450_Christopher_Teague;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -36,6 +37,8 @@ namespace PROGPOEP2_ST10083450
             InitializeComponent();
             Closing += MainWindow_Closing;
         }
+
+        public SqlConnection sqlConnection;
 
         private void btnAddSemester_Click(object sender, RoutedEventArgs e)
         {
@@ -143,6 +146,11 @@ namespace PROGPOEP2_ST10083450
             }
 
             myDataGrid.ItemsSource = dataTable.DefaultView;
+
+            using (SqlConnection connection = new SqlConnection(ConnectionString.connStr))
+            {
+
+            }
         }
 
         private void btnExit_Click(object sender, RoutedEventArgs e)
@@ -159,5 +167,7 @@ namespace PROGPOEP2_ST10083450
             Application.Current.Shutdown();
             
         }
+
+
     }
 }
