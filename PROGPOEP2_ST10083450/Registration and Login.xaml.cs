@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using System;
+using PROGPOEP2_Library_ST10083450;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.AccessControl;
@@ -14,6 +15,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using PROGPOEP2_Library_ST10083450.Models;
 
 namespace PROGPOEP2_ST10083450
 {
@@ -22,6 +24,9 @@ namespace PROGPOEP2_ST10083450
     /// </summary>
     public partial class Registration_and_Login : Window
     {
+        St10083450ProgPoeContext db = new St10083450ProgPoeContext();
+
+        
         public Registration_and_Login()
         {
             InitializeComponent();
@@ -44,18 +49,13 @@ namespace PROGPOEP2_ST10083450
                 string regPassword = pbRegPassword.Password.ToString();
                 string regPasswordHash = BCrypt.Net.BCrypt.EnhancedHashPassword(regPassword, 10);
 
-                using (SqlConnection connection = new SqlConnection(ConnectionString.connStr))
-                {
-                    connection.Open();
-                    using (SqlCommand command = connection.CreateCommand())
-                    {
-                        command.CommandText = "INSERT INTO Users (userName, passwordHash) VALUES (@UserName ,@PasswordHash)";
-                        command.Parameters.AddWithValue("@UserName", regUsername);
-                        command.Parameters.AddWithValue("@PasswordHash", regPasswordHash);
-                        command.ExecuteNonQuery();
-                    }
-                  
-                }
+               
+               
+                db.Users.Add(new User {UserName = regUsername, PasswordHash = regPasswordHash });
+                db.SaveChanges();
+
+
+
             gridRegisterPage.Visibility = Visibility.Hidden;
             gridLoginPage.Visibility = Visibility.Visible;
 
@@ -68,13 +68,48 @@ namespace PROGPOEP2_ST10083450
         }
 
         private void btnLoginAccount_Click(object sender, RoutedEventArgs e)
-        {   
-            MainWindow mainWindow = new MainWindow();
-            this.Visibility = Visibility.Hidden;
-            mainWindow.ShowDialog();
-            this.Visibility = Visibility.Visible;
+        {
+            try
+            { string logUsername = tbxloginUsername.Text;
+              string logPassword = pbloginPassword.Password.ToString();
+                
 
-            
+                var getUser = db.Users.FirstOrDefault(m => m.UserName == logUsername);
+
+                if (getUser != null)
+                {
+                   string storedHashedPassword = getUser.PasswordHash;
+
+
+                   bool verifyPassword = BCrypt.Net.BCrypt.Verify(logPassword, storedHashedPassword);
+
+                    if (verifyPassword)
+                    {
+                         ListUtil.usersLoggedIn.Add(logUsername);
+                         ListUtil.usersLoggedIn.Add(logPassword);
+                         MainWindow mainWindow = new MainWindow();
+                         this.Visibility = Visibility.Hidden;
+                         mainWindow.ShowDialog();
+                         this.Visibility = Visibility.Visible;
+                    }else
+                    {
+                        MessageBox.Show("Incorrect Password");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Username does not match");
+                }
+                
+
+               
+               
+
+               
+            }catch (Exception ex)
+            {
+                MessageBox.Show("Please enter valid credentials");
+            }
         }
 
         private void RegAndLogClosing(object sender, System.ComponentModel.CancelEventArgs e)

@@ -3,8 +3,6 @@ C:\Users\user-pc\source\repos\PROGPOEP2_ST10083450\PROGPOEP2_ST10083450\bin\Debu
 C:\Users\user-pc\source\repos\PROGPOEP2_ST10083450\PROGPOEP2_ST10083450\bin\Debug\net7.0-windows\PROGPOEP2_ST10083450.runtimeconfig.json
 C:\Users\user-pc\source\repos\PROGPOEP2_ST10083450\PROGPOEP2_ST10083450\bin\Debug\net7.0-windows\PROGPOEP2_ST10083450.dll
 C:\Users\user-pc\source\repos\PROGPOEP2_ST10083450\PROGPOEP2_ST10083450\bin\Debug\net7.0-windows\PROGPOEP2_ST10083450.pdb
-C:\Users\user-pc\source\repos\PROGPOEP2_ST10083450\PROGPOEP2_ST10083450\bin\Debug\net7.0-windows\PROG6212_POE_P1_Library_ST10083450_Christopher Teague.dll
-C:\Users\user-pc\source\repos\PROGPOEP2_ST10083450\PROGPOEP2_ST10083450\bin\Debug\net7.0-windows\PROG6212_POE_P1_Library_ST10083450_Christopher Teague.pdb
 C:\Users\user-pc\source\repos\PROGPOEP2_ST10083450\PROGPOEP2_ST10083450\obj\Debug\net7.0-windows\PROGPOEP2_ST10083450.csproj.AssemblyReference.cache
 C:\Users\user-pc\source\repos\PROGPOEP2_ST10083450\PROGPOEP2_ST10083450\obj\Debug\net7.0-windows\MainWindow.g.cs
 C:\Users\user-pc\source\repos\PROGPOEP2_ST10083450\PROGPOEP2_ST10083450\obj\Debug\net7.0-windows\App.g.cs
@@ -54,3 +52,18 @@ C:\Users\user-pc\source\repos\PROGPOEP2_ST10083450\PROGPOEP2_ST10083450\bin\Debu
 C:\Users\user-pc\source\repos\PROGPOEP2_ST10083450\PROGPOEP2_ST10083450\bin\Debug\net7.0-windows\runtimes\win-x86\native\sni.dll
 C:\Users\user-pc\source\repos\PROGPOEP2_ST10083450\PROGPOEP2_ST10083450\bin\Debug\net7.0-windows\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\user-pc\source\repos\PROGPOEP2_ST10083450\PROGPOEP2_ST10083450\bin\Debug\net7.0-windows\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\user-pc\source\repos\PROGPOEP2_ST10083450\PROGPOEP2_ST10083450\bin\Debug\net7.0-windows\PROGPOEP2_Library_ST10083450.dll
+C:\Users\user-pc\source\repos\PROGPOEP2_ST10083450\PROGPOEP2_ST10083450\bin\Debug\net7.0-windows\PROGPOEP2_Library_ST10083450.pdb
+C:\Users\user-pc\source\repos\PROGPOEP2_ST10083450\PROGPOEP2_ST10083450\bin\Debug\net7.0-windows\Microsoft.EntityFrameworkCore.dll
+C:\Users\user-pc\source\repos\PROGPOEP2_ST10083450\PROGPOEP2_ST10083450\bin\Debug\net7.0-windows\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\user-pc\source\repos\PROGPOEP2_ST10083450\PROGPOEP2_ST10083450\bin\Debug\net7.0-windows\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\user-pc\source\repos\PROGPOEP2_ST10083450\PROGPOEP2_ST10083450\bin\Debug\net7.0-windows\Microsoft.EntityFrameworkCore.SqlServer.dll
+C:\Users\user-pc\source\repos\PROGPOEP2_ST10083450\PROGPOEP2_ST10083450\bin\Debug\net7.0-windows\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\user-pc\source\repos\PROGPOEP2_ST10083450\PROGPOEP2_ST10083450\bin\Debug\net7.0-windows\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\user-pc\source\repos\PROGPOEP2_ST10083450\PROGPOEP2_ST10083450\bin\Debug\net7.0-windows\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\user-pc\source\repos\PROGPOEP2_ST10083450\PROGPOEP2_ST10083450\bin\Debug\net7.0-windows\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\user-pc\source\repos\PROGPOEP2_ST10083450\PROGPOEP2_ST10083450\bin\Debug\net7.0-windows\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\user-pc\source\repos\PROGPOEP2_ST10083450\PROGPOEP2_ST10083450\bin\Debug\net7.0-windows\Microsoft.Extensions.Logging.dll
+C:\Users\user-pc\source\repos\PROGPOEP2_ST10083450\PROGPOEP2_ST10083450\bin\Debug\net7.0-windows\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\user-pc\source\repos\PROGPOEP2_ST10083450\PROGPOEP2_ST10083450\bin\Debug\net7.0-windows\Microsoft.Extensions.Options.dll
+C:\Users\user-pc\source\repos\PROGPOEP2_ST10083450\PROGPOEP2_ST10083450\bin\Debug\net7.0-windows\Microsoft.Extensions.Primitives.dll

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
-using PROG6212_POE_P1_Library_ST10083450_Christopher_Teague;
+using PROGPOEP2_Library_ST10083450;
+using PROGPOEP2_Library_ST10083450.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -23,15 +24,17 @@ namespace PROGPOEP2_ST10083450
     /// </summary>
     public partial class MainWindow : Window
     {
+        St10083450ProgPoeContext db = new St10083450ProgPoeContext();
         public static string modName;
         public string modCode;
-        public double numCreds;
-        public double numClassHrs;
-        public static double numOfWeeks;
+        public int numCreds;
+        public int numClassHrs;
+        public static int numOfWeeks;
         public DateTime semDate;
         public double numSelfStudyHrs;
         public DateTime selfStudyDate;
         public String mCode;
+        public float rStudyHrs;
         public MainWindow()
         {
             InitializeComponent();
@@ -45,10 +48,11 @@ namespace PROGPOEP2_ST10083450
             try
             {
                 Semester semester = new Semester();
-                numOfWeeks = Convert.ToDouble(tbNumberOfWeeks.Text);
+                numOfWeeks = Convert.ToInt32(tbNumberOfWeeks.Text);
                 semDate = Convert.ToDateTime(dpSemesterStartDate.Text);
 
-                ListUtil.semesters.Add(new Semester { numWeeks = numOfWeeks, semesterStartDate = semDate });
+               db.Semesters.Add(new Semester { UserId = 1 ,NumWeeks = numOfWeeks, SemesterStartDate = semDate });
+                db.SaveChanges();
                 MessageBox.Show("Semester Info recorded");
 
 
@@ -69,26 +73,27 @@ namespace PROGPOEP2_ST10083450
             {
                 modName = tbModuleName.Text;
                 modCode = tbModuleCode.Text;
-                numCreds = Convert.ToDouble(tbNumberOfCredits.Text);
-                numClassHrs = Convert.ToDouble(tbClassHours.Text);
+                numCreds = Convert.ToInt32(tbNumberOfCredits.Text);
+                numClassHrs = Convert.ToInt32(tbClassHours.Text);
+                rStudyHrs = Calculations.requiredStudyHrs(numCreds, numClassHrs, numOfWeeks);
 
-
-                ListUtil.modules.Add(new Module { moduleName = modName, moduleCode = modCode, numberCredits = numCreds, numClassHours = numClassHrs, remainingStudyHours = Calculations.requiredStudyHrs(numCreds, numClassHrs, numOfWeeks) });
+                db.Modules.Add(new Module { UserId = 1 ,ModName = modName, ModCode = modCode, ModCredits = numCreds, ClassHours = numClassHrs, RemainingStudyHrs = rStudyHrs });
+                db.SaveChanges();
                 cbModuleCode.Items.Clear();
-                List<Module> modList = ListUtil.modules;
-                foreach (Module item in modList)
-                {
-                    cbModuleCode.Items.Add(item.moduleCode);
-                }
+               // List<Module> modList = db.Modules.ToList();
+               // foreach (Module item in modList)
+              //  {
+              //      cbModuleCode.Items.Add(item.ModCode);
+              //  }
                 MessageBox.Show("Module Added!!");
                 tbModuleName.Clear();
                 tbModuleCode.Clear();
                 tbClassHours.Clear();
                 tbNumberOfCredits.Clear();
             }
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show("Failed to add module");
+                MessageBox.Show(ex.Message);
                 tbModuleName.Clear();
                 tbModuleCode.Clear();
                 tbClassHours.Clear();
@@ -111,9 +116,10 @@ namespace PROGPOEP2_ST10083450
                 //Sameer Saini
 
                 //LINQ used to find Module Code
-                var findModule = ListUtil.modules.Find(x => x.moduleCode == mCode);
+                
+                //var userMods = db.Modules.Where(m => m.UserId == ).ToList();
 
-                findModule.remainingStudyHours = Calculations.SelfStudyCalc(numSelfStudyHrs, findModule.remainingStudyHours);
+                //userMods.RemainingStudyHrs = Calculations.SelfStudyCalc(numSelfStudyHrs, findModule.RemainingStudyHrs);
                 MessageBox.Show("Self Study Hours Recorded");
                 tbNumberOfSelfStudyHours.Clear();
             }
@@ -132,7 +138,7 @@ namespace PROGPOEP2_ST10083450
             //https://www.appsloveworld.com/csharp/100/1671/how-to-combine-multiple-lists-and-use-as-a-gridview-datasource?expand_article=1
             //Norberto Escobar
             //https://stackoverflow.com/users/4783509/norberto-escobar
-
+            
             DataTable dataTable = new DataTable();
             dataTable.Columns.Add("moduleName");
             dataTable.Columns.Add("moduleCode");
@@ -140,17 +146,13 @@ namespace PROGPOEP2_ST10083450
             dataTable.Columns.Add("numClassHours");
             dataTable.Columns.Add("remainingStudyHours");
 
-            foreach (Module module in ListUtil.modules)
+            foreach (Module module in db.Modules)
             {
-                dataTable.Rows.Add(module.moduleName, module.moduleCode, module.numberCredits, module.numClassHours, module.remainingStudyHours);
+                dataTable.Rows.Add(module.ModName, module.ModCode, module.ModCredits, module.ClassHours, module.RemainingStudyHrs);
             }
 
             myDataGrid.ItemsSource = dataTable.DefaultView;
 
-            using (SqlConnection connection = new SqlConnection(ConnectionString.connStr))
-            {
-
-            }
         }
 
         private void btnExit_Click(object sender, RoutedEventArgs e)
@@ -171,3 +173,7 @@ namespace PROGPOEP2_ST10083450
 
     }
 }
+
+
+
+
