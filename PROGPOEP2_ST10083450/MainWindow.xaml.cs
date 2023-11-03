@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Reflection.Emit;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,7 +25,7 @@ namespace PROGPOEP2_ST10083450
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
-    {
+    {   ListUtil ListUtil = new ListUtil();
         St10083450ProgPoeContext db = new St10083450ProgPoeContext();
         public static string modName;
         public string modCode;
@@ -39,26 +41,27 @@ namespace PROGPOEP2_ST10083450
         {
             InitializeComponent();
             Closing += MainWindow_Closing;
+            foreach (Module modList in db.Modules.Where(m => m.UserId == ListUtil.usersLoggedIn[0].UserId).ToList())
+            {
+                cbModuleCode.Items.Add(modList.ModCode);
+            } 
+           
         }
 
         public SqlConnection sqlConnection;
 
         private void btnAddSemester_Click(object sender, RoutedEventArgs e)
         {
+           
             try
             {
                 Semester semester = new Semester();
                 numOfWeeks = Convert.ToInt32(tbNumberOfWeeks.Text);
                 semDate = Convert.ToDateTime(dpSemesterStartDate.Text);
 
-               db.Semesters.Add(new Semester { UserId = 1 ,NumWeeks = numOfWeeks, SemesterStartDate = semDate });
+               db.Semesters.Add(new Semester { UserId =  ListUtil.usersLoggedIn[0].UserId,NumWeeks = numOfWeeks, SemesterStartDate = semDate });
                 db.SaveChanges();
                 MessageBox.Show("Semester Info recorded");
-
-
-
-
-
             }
             catch
             {
@@ -66,6 +69,11 @@ namespace PROGPOEP2_ST10083450
                 tbNumberOfWeeks.Clear();
             }
         }
+
+
+
+
+            
 
         private void btnAddModule_Click(object sender, RoutedEventArgs e)
         {
@@ -77,14 +85,16 @@ namespace PROGPOEP2_ST10083450
                 numClassHrs = Convert.ToInt32(tbClassHours.Text);
                 rStudyHrs = Calculations.requiredStudyHrs(numCreds, numClassHrs, numOfWeeks);
 
-                db.Modules.Add(new Module { UserId = 1 ,ModName = modName, ModCode = modCode, ModCredits = numCreds, ClassHours = numClassHrs, RemainingStudyHrs = rStudyHrs });
+                db.Modules.Add(new Module { UserId = ListUtil.usersLoggedIn[0].UserId, ModName = modName, ModCode = modCode, ModCredits = numCreds, ClassHours = numClassHrs, RemainingStudyHrs = rStudyHrs });
                 db.SaveChanges();
                 cbModuleCode.Items.Clear();
-               // List<Module> modList = db.Modules.ToList();
-               // foreach (Module item in modList)
-              //  {
-              //      cbModuleCode.Items.Add(item.ModCode);
-              //  }
+                foreach (Module modList in db.Modules.Where(m => m.UserId == ListUtil.usersLoggedIn[0].UserId).ToList())
+                {
+                    cbModuleCode.Items.Add(modList.ModCode);
+                }
+                
+               //Module modList = db.Modules.Where(m => m.UserId == ListUtil.usersLoggedIn[0].UserId).ToList();
+               
                 MessageBox.Show("Module Added!!");
                 tbModuleName.Clear();
                 tbModuleCode.Clear();
@@ -115,17 +125,18 @@ namespace PROGPOEP2_ST10083450
                 //https://codelikeadev.com/blog/find-item-in-list-csharp
                 //Sameer Saini
 
-                //LINQ used to find Module Code
+                //LINQs used to find Module Code
                 
-                //var userMods = db.Modules.Where(m => m.UserId == ).ToList();
-
-                //userMods.RemainingStudyHrs = Calculations.SelfStudyCalc(numSelfStudyHrs, findModule.RemainingStudyHrs);
+                List<Module> currentUserMod = db.Modules.Where(m => m.UserId == ListUtil.usersLoggedIn[0].UserId).ToList();
+                Module findMod = currentUserMod.FirstOrDefault(m => m.ModCode == mCode);
+              findMod.RemainingStudyHrs = Calculations.SelfStudyCalc(numSelfStudyHrs, findMod.RemainingStudyHrs);
+                 
                 MessageBox.Show("Self Study Hours Recorded");
                 tbNumberOfSelfStudyHours.Clear();
             }
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show("Please enter the values in correctly");
+                MessageBox.Show(ex.Message);
 
                 tbNumberOfSelfStudyHours.Clear();
             }
@@ -138,7 +149,8 @@ namespace PROGPOEP2_ST10083450
             //https://www.appsloveworld.com/csharp/100/1671/how-to-combine-multiple-lists-and-use-as-a-gridview-datasource?expand_article=1
             //Norberto Escobar
             //https://stackoverflow.com/users/4783509/norberto-escobar
-            
+            int currentUserID = ListUtil.usersLoggedIn[0].UserId;
+
             DataTable dataTable = new DataTable();
             dataTable.Columns.Add("moduleName");
             dataTable.Columns.Add("moduleCode");
@@ -146,7 +158,7 @@ namespace PROGPOEP2_ST10083450
             dataTable.Columns.Add("numClassHours");
             dataTable.Columns.Add("remainingStudyHours");
 
-            foreach (Module module in db.Modules)
+            foreach (Module module in db.Modules.Where(m => m.UserId == currentUserID))
             {
                 dataTable.Rows.Add(module.ModName, module.ModCode, module.ModCredits, module.ClassHours, module.RemainingStudyHrs);
             }
@@ -155,9 +167,13 @@ namespace PROGPOEP2_ST10083450
 
         }
 
-        private void btnExit_Click(object sender, RoutedEventArgs e)
-        {
-          Registration_and_Login registration_And_Login = new Registration_and_Login();
+        private void btnLogout_Click(object sender, RoutedEventArgs e)
+        { 
+            ListUtil listUtil = new ListUtil();
+            listUtil.ClearList();
+
+            Registration_and_Login registration_And_Login = new Registration_and_Login();
+
             this.Visibility = Visibility.Hidden;
             registration_And_Login.ShowDialog();
             this.Visibility = Visibility.Visible;
@@ -170,7 +186,29 @@ namespace PROGPOEP2_ST10083450
             
         }
 
+        private void btnCheckSemester_Click(object sender, RoutedEventArgs e)
+        {
+            Semester checkWeeks = db.Semesters.FirstOrDefault(s => s.UserId == ListUtil.usersLoggedIn[0].UserId);
+            if (checkWeeks != null)
+            {
+                numOfWeeks = checkWeeks.NumWeeks;
+                
+                MessageBox.Show("Semester Data is already recorded");
+               
 
+                gridCheckSemester.Visibility = Visibility.Hidden;
+                string tabtoswitchto = "Add Module";
+                foreach  (TabItem tab in myTabControl.Items)
+                {
+                    if (tab.Header.ToString() == tabtoswitchto)
+                    {
+                        myTabControl.SelectedItem = tab;
+                    }
+                }
+
+
+            }
+        }
     }
 }
 

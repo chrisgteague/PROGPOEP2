@@ -7,8 +7,8 @@
         mc:Ignorable="d"
          Title="MainWindow" Height="500" Width="650">
     <Grid>
-        <TabControl Background="#FFC3E2B8">
-            <TabItem Header="Semester Start">
+        <TabControl x:Name="myTabControl" Background="#FFC3E2B8">
+            <TabItem x:Name="tabSemester" Header="Semester Start">
                 <Grid>
                     <Grid.Background>
                         <ImageBrush/>
@@ -27,7 +27,7 @@
                     </Button>
                 </Grid>
             </TabItem>
-            <TabItem Header="Add Module" FontSize="12
+            <TabItem x:Name="tabModule" Header="Add Module" FontSize="12
              ">
                 <Grid Background="#FFC3E2B8">
                     <TextBox x:Name="tbModuleName" HorizontalAlignment="Left" Margin="308,47,0,0" TextWrapping="Wrap" Text=" " VerticalAlignment="Top" Width="120" FontSize="18"/>
@@ -88,7 +88,7 @@
                             <DataGridTextColumn Header="Study Hours" Binding="{Binding remainingStudyHours}" />
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Button x:Name="btnExit" Content="Exit" HorizontalAlignment="Left" Margin="388,326,0,0" VerticalAlignment="Top" Height="57" Width="224" FontSize="18" Click="btnExit_Click">
+                    <Button x:Name="btnLogout" Content="Logout" HorizontalAlignment="Left" Margin="388,326,0,0" VerticalAlignment="Top" Height="57" Width="224" FontSize="18" Click="btnLogout_Click">
                         <Button.Background>
                             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                                 <GradientStop Color="Black"/>
@@ -101,5 +101,8 @@
                 </Grid>
             </TabItem>
         </TabControl>
+        <Grid x:Name="gridCheckSemester" Background="#FF2099A2">
+            <Button x:Name="btnCheckSemester" Content="Check for Semester" HorizontalAlignment="Center" Margin="0,228,0,0" VerticalAlignment="Top" Height="60" Width="202" Click="btnCheckSemester_Click"/>
+        </Grid>
     </Grid>
 </Window>

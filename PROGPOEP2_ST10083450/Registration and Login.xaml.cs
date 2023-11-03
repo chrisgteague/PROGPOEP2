@@ -47,6 +47,8 @@ namespace PROGPOEP2_ST10083450
            
             try
             {
+                if (tbxRegUsername.Text != "" && pbRegPassword.Password.ToString() != "")
+                {
                 string regUsername = tbxRegUsername.Text;
                 string regPassword = pbRegPassword.Password.ToString();
                 string regPasswordHash = GetSHA256Hash(regPassword);
@@ -58,14 +60,20 @@ namespace PROGPOEP2_ST10083450
 
 
 
-            gridRegisterPage.Visibility = Visibility.Hidden;
-            gridLoginPage.Visibility = Visibility.Visible;
+                gridRegisterPage.Visibility = Visibility.Hidden;
+                gridLoginPage.Visibility = Visibility.Visible;
 
+                }
+                else
+                {
+                    MessageBox.Show("Please fill in both fields");
+                }
+          
 
             }
             catch (Exception ex)
             {
-               MessageBox.Show("Errrrrrrrrror");
+               MessageBox.Show("Error");
             }
         }
 
@@ -85,8 +93,8 @@ namespace PROGPOEP2_ST10083450
                     
                     if (storedHashedPassword == logPasswordHash)
                     {
-                         ListUtil.usersLoggedIn.Add(logUsername);
-                         ListUtil.usersLoggedIn.Add(logPassword);
+                         ListUtil.usersLoggedIn.Add(getUser);
+                         
                          MainWindow mainWindow = new MainWindow();
                          this.Visibility = Visibility.Hidden;
                          mainWindow.ShowDialog();
@@ -137,6 +145,17 @@ namespace PROGPOEP2_ST10083450
                 }
                 return builder.ToString();
             }
+        }
+
+        private void btnLoginBack_Click(object sender, RoutedEventArgs e)
+        {
+            gridRegisterPage.Visibility = Visibility.Visible;
+            gridRegisterOrLogin.Visibility = Visibility.Visible;
+        }
+
+        private void btnRegBack_Click(object sender, RoutedEventArgs e)
+        {
+            gridRegisterOrLogin.Visibility = Visibility.Visible;
         }
     }
 }
