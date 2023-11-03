@@ -54,14 +54,21 @@ namespace PROGPOEP2_ST10083450
         {
            
             try
-            {
-                Semester semester = new Semester();
+            { Semester semester = new Semester();
                 numOfWeeks = Convert.ToInt32(tbNumberOfWeeks.Text);
                 semDate = Convert.ToDateTime(dpSemesterStartDate.Text);
+                if (numOfWeeks != 0)
+                {
 
-               db.Semesters.Add(new Semester { UserId =  ListUtil.usersLoggedIn[0].UserId,NumWeeks = numOfWeeks, SemesterStartDate = semDate });
-                db.SaveChanges();
-                MessageBox.Show("Semester Info recorded");
+
+                    db.Semesters.Add(new Semester { UserId = ListUtil.usersLoggedIn[0].UserId, NumWeeks = numOfWeeks, SemesterStartDate = semDate });
+                    db.SaveChanges();
+                    MessageBox.Show("Semester Info recorded");
+                }
+                else
+                {
+                    MessageBox.Show("Please enter a number of weeks");
+                }
             }
             catch
             {
@@ -93,7 +100,7 @@ namespace PROGPOEP2_ST10083450
                     cbModuleCode.Items.Add(modList.ModCode);
                 }
                 
-               //Module modList = db.Modules.Where(m => m.UserId == ListUtil.usersLoggedIn[0].UserId).ToList();
+              
                
                 MessageBox.Show("Module Added!!");
                 tbModuleName.Clear();
@@ -129,8 +136,8 @@ namespace PROGPOEP2_ST10083450
                 
                 List<Module> currentUserMod = db.Modules.Where(m => m.UserId == ListUtil.usersLoggedIn[0].UserId).ToList();
                 Module findMod = currentUserMod.FirstOrDefault(m => m.ModCode == mCode);
-              findMod.RemainingStudyHrs = Calculations.SelfStudyCalc(numSelfStudyHrs, findMod.RemainingStudyHrs);
-                 
+                findMod.RemainingStudyHrs = Calculations.SelfStudyCalc(numSelfStudyHrs, findMod.RemainingStudyHrs);
+                db.SaveChanges();
                 MessageBox.Show("Self Study Hours Recorded");
                 tbNumberOfSelfStudyHours.Clear();
             }
@@ -207,6 +214,11 @@ namespace PROGPOEP2_ST10083450
                 }
 
 
+            }
+            else
+            {
+                MessageBox.Show("No Semester Data recorded");
+                gridCheckSemester.Visibility = Visibility.Hidden;
             }
         }
     }

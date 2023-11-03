@@ -58,7 +58,8 @@ namespace PROGPOEP2_ST10083450
                 db.Users.Add(new User {UserName = regUsername, PasswordHash = regPasswordHash });
                 db.SaveChanges();
 
-
+                 tbxRegUsername.Clear();
+                 pbRegPassword.Clear();
 
                 gridRegisterPage.Visibility = Visibility.Hidden;
                 gridLoginPage.Visibility = Visibility.Visible;
@@ -67,6 +68,8 @@ namespace PROGPOEP2_ST10083450
                 else
                 {
                     MessageBox.Show("Please fill in both fields");
+                    tbxRegUsername.Clear();
+                    pbRegPassword.Clear();
                 }
           
 
@@ -74,6 +77,8 @@ namespace PROGPOEP2_ST10083450
             catch (Exception ex)
             {
                MessageBox.Show("Error");
+                tbxRegUsername.Clear();
+                pbRegPassword.Clear();
             }
         }
 
@@ -99,14 +104,21 @@ namespace PROGPOEP2_ST10083450
                          this.Visibility = Visibility.Hidden;
                          mainWindow.ShowDialog();
                          this.Visibility = Visibility.Visible;
+
+                        tbxloginUsername.Clear();
+                        pbloginPassword.Clear();
                     }else
                     {
                         MessageBox.Show("Incorrect Password");
+                        tbxloginUsername.Clear();
+                        pbloginPassword.Clear();
                     }
                 }
                 else
                 {
                     MessageBox.Show("Username does not match");
+                    tbxloginUsername.Clear();
+                    pbloginPassword.Clear();
                 }
                 
 
@@ -117,6 +129,8 @@ namespace PROGPOEP2_ST10083450
             }catch (Exception ex)
             {
                 MessageBox.Show("Please enter valid credentials");
+                tbxloginUsername.Clear();
+                pbloginPassword.Clear();
             }
         }
 
@@ -133,7 +147,8 @@ namespace PROGPOEP2_ST10083450
             
         }
 
-        static string GetSHA256Hash(string input)// This can be setup in your custom Class library
+        //hasing method
+        static string GetSHA256Hash(string input)
         {
             using (SHA256 sha256Hash = SHA256.Create())
             {
