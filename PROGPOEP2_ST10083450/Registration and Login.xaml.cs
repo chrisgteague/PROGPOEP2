@@ -16,6 +16,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using PROGPOEP2_Library_ST10083450.Models;
+using BCrypt.Net;
+using System.Security.Cryptography;
 
 namespace PROGPOEP2_ST10083450
 {
@@ -47,7 +49,7 @@ namespace PROGPOEP2_ST10083450
             {
                 string regUsername = tbxRegUsername.Text;
                 string regPassword = pbRegPassword.Password.ToString();
-                string regPasswordHash = BCrypt.Net.BCrypt.EnhancedHashPassword(regPassword, 10);
+                string regPasswordHash = GetSHA256Hash(regPassword);
 
                
                
@@ -72,7 +74,7 @@ namespace PROGPOEP2_ST10083450
             try
             { string logUsername = tbxloginUsername.Text;
               string logPassword = pbloginPassword.Password.ToString();
-                
+                string logPasswordHash = GetSHA256Hash(logPassword);
 
                 var getUser = db.Users.FirstOrDefault(m => m.UserName == logUsername);
 
@@ -80,10 +82,8 @@ namespace PROGPOEP2_ST10083450
                 {
                    string storedHashedPassword = getUser.PasswordHash;
 
-
-                   bool verifyPassword = BCrypt.Net.BCrypt.Verify(logPassword, storedHashedPassword);
-
-                    if (verifyPassword)
+                    
+                    if (storedHashedPassword == logPasswordHash)
                     {
                          ListUtil.usersLoggedIn.Add(logUsername);
                          ListUtil.usersLoggedIn.Add(logPassword);
@@ -123,6 +123,20 @@ namespace PROGPOEP2_ST10083450
             gridRegisterOrLogin.Visibility = Visibility.Hidden;
             gridRegisterPage.Visibility= Visibility.Visible;
             
+        }
+
+        static string GetSHA256Hash(string input)// This can be setup in your custom Class library
+        {
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    builder.Append(bytes[i].ToString("x2"));
+                }
+                return builder.ToString();
+            }
         }
     }
 }
